@@ -1,0 +1,1 @@
+javaws https://community.topcoder.com/contest/arena/ContestAppletProd.jnlp

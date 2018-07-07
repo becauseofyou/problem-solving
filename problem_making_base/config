@@ -1,0 +1,11 @@
+-p 10 -t 0.2 -m 131072
+test data0.in data0.out
+test data1.in data1.out
+test data2.in data2.out
+test data3.in data3.out
+test data4.in data4.out
+test data5.in data5.out
+test data6.in data6.out
+test data7.in data7.out
+test data8.in data8.out
+test data9.in data9.out
