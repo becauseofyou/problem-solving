@@ -1,0 +1,164 @@
+template<typename T>
+class segtree {
+#define lson tree[lc[x]]
+#define rson tree[rc[x]]
+    public:
+        struct node{
+            T mx;
+            int add;
+            template <typename M>
+            void apply(int l, int r, M v) {
+                add += v;
+                mx += v;
+            }
+            node () {
+                add = mx = 0;
+            }
+            void debug() {
+                // debug
+            }
+            node operator + (const node &a) {
+                node res;
+                res.mx = max(mx, a.mx);
+                return res;
+            }
+        };
+        segtree(){}
+        
+        segtree(int n):n(n) {
+            doit(n);
+        }
+        template <typename M>
+            segtree(const vector<M> &v) {
+                int n = v.size();
+                doit(n);
+                root = build(0, n - 1, v);
+            }
+        void doit(int n) {
+            this->n = n;
+            assert(n > 0);
+            tot_nodes = 0;
+            tree.resize(2 * n - 1);
+            lc.resize(2 * n - 1);
+            rc.resize(2 * n - 1);
+        }
+        void init(int n) {
+            doit(n);
+            root = build(0, n - 1);
+        }
+        int root;
+        int n;
+        vector <int> lc, rc;
+        vector <node> tree;
+        int tot_nodes;
+        int newnode() {
+            return tot_nodes++;
+        }
+
+        void push(int x, int l, int r) {
+            if (tree[x].add) {
+                lson.add += tree[x].add;
+                rson.add += tree[x].add;
+                lson.mx += tree[x].add;
+                rson.mx += tree[x].add;
+                tree[x].add = 0;
+            }
+        }
+
+        void pull(int x) {
+            tree[x] = lson + rson;
+        }
+
+        int build(int l, int r) {
+            int now = newnode();
+            if (l == r) {
+                return now;
+            }
+            int m = (l + r) >> 1;
+            lc[now] = build(l, m);
+            rc[now] = build(m + 1, r);
+            pull(now);
+            return now;
+        }
+
+        template <typename M>
+            int build(int x, int l, int r, const vector<M> &v) {
+                int now = newnode();
+                if (l == r) {
+                    tree[now].apply(l, r, v[l]);
+                    return now;
+                }
+                int m = (l + r) >> 1;
+                lc[now] = build(l, m, v);
+                rc[now] = build(m + 1, r, v);
+                pull(now);
+                return now;
+            }
+        template <typename M>
+        int build(int l, int r, const vector<M> &v) {
+            int now = newnode();
+            if (l == r) {
+                tree[now].apply(l, r, v[l]);
+                return now;
+            }
+            int m = (l + r) >> 1;
+            lc[now] = build(l, m, v);
+            rc[now] = build(m + 1, r, v);
+            pull(now);
+            return now;
+        }
+
+        node get(int x, int l, int r, int ll, int rr) {
+            if (ll <= l && r <= rr) {
+                return tree[x];
+            }
+            int m = (l + r) >> 1;
+            push(x, l, r);
+            node res;
+            if (rr <= m) {
+                res = get(lc[x], l, m, ll, rr);
+            } else {
+                if (ll > m) {
+                    res = get(rc[x], m + 1, r, ll, rr);
+                } else {
+                    res = get(lc[x], l, m, ll, rr) + get(rc[x], m + 1, r, ll, rr);
+                }
+            }
+            pull(x);
+            return res;
+        }
+
+        template <typename M>
+            void modify(int x, int l, int r, int ll, int rr, M v) {
+                if (ll <= l && r <= rr) {
+                    tree[x].apply(l, r, v);
+                    return;
+                }
+                int m = (l + r) >> 1;
+                push(x, l, r);
+                if (ll <= m) {
+                    modify(lc[x], l, m, ll, rr, v);
+                }
+                if (rr > m) {
+                    modify(rc[x], m + 1, r, ll, rr, v);
+                }
+                pull(x);
+            }
+
+        node get(int ll, int rr) {
+            assert(0 <= ll && ll <= rr && rr <= n - 1);
+            return get(root, 0, n - 1, ll, rr);
+        }
+
+        template <typename M>
+            void modify(int ll, int rr, M v) {
+
+                assert(0 <= ll && ll <= rr && rr <= n - 1);
+                modify(root, 0, n - 1, ll, rr, v);
+            }
+};
+
+int main () {
+    segtree <int> st[2];
+    return 0;
+}

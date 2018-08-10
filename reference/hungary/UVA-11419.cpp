@@ -20,10 +20,11 @@
 #include <vector>
 using namespace std;
 const int N = 1111;
+const int M = 1111;
 
 vector<int> edge[N];
-bool sx[N], sy[N];
-int mx[N], my[N];
+bool sx[N], sy[M];
+int mx[N], my[M];
 
 bool dfs(int u) {
     sx[u] = true;
@@ -40,6 +41,28 @@ bool dfs(int u) {
     return false;
 }
 
+void solve () {
+    memset(my, -1, sizeof(my));
+    memset(mx, -1, sizeof(mx));
+    int ret = 0;
+    for(int i = 1; i <= n; i++) {
+        memset(sy, false, sizeof(sy));
+        if(dfs(i)) 
+            ret++;
+    }
+    vector<int> row, col;
+    memset(sy, false, sizeof(sy));
+    memset(sx, false, sizeof(sx));
+    for(int i = 1; i <= n; i++) if(mx[i] == -1) {
+        dfs(i);
+    }
+    for(int i = 1; i <= n; i++) if(!sx[i]) {
+        row.push_back(i);
+    }
+    for(int i = 1; i <= m; i++) if(sy[i]) {
+        col.push_back(i);
+    }
+}
 int main () {
     int n, m, k, x, y;
     while(scanf("%d%d%d", &n, &m, &k) == 3) {
@@ -48,26 +71,6 @@ int main () {
         for(int i = 0; i < k; i++) {
             scanf("%d%d", &x, &y);
             edge[x].push_back(y);
-        }
-        memset(my, -1, sizeof(my));
-        memset(mx, -1, sizeof(mx));
-        int ret = 0;
-        for(int i = 1; i <= n; i++) {
-            memset(sy, false, sizeof(sy));
-            if(dfs(i)) 
-                ret++;
-        }
-        vector<int> row, col;
-        memset(sy, false, sizeof(sy));
-        memset(sx, false, sizeof(sx));
-        for(int i = 1; i <= n; i++) if(mx[i] == -1) {
-            dfs(i);
-        }
-        for(int i = 1; i <= n; i++) if(!sx[i]) {
-            row.push_back(i);
-        }
-        for(int i = 1; i <= m; i++) if(sy[i]) {
-            col.push_back(i);
         }
         printf("%d", ret);
         for(int r : row) printf(" r%d", r); 

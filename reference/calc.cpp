@@ -11,17 +11,7 @@ inline void sub(int &a, int b) {
 }
 
 inline int mul(int a, int b) {
-#if !defined(_WIN32) || defined(_WIN64)
     return (long long) a * b % md;
-#endif
-    unsigned long long x = (long long) a * b;
-    unsigned xh = (unsigned) (x >> 32), xl = (unsigned) x, d, m;
-    asm(
-            "divl %4; \n\t"
-            : "=a" (d), "=d" (m)
-            : "d" (xh), "a" (xl), "r" (md)
-       );
-    return m;
 }
 
 inline int power(int a, int b) {

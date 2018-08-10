@@ -3,6 +3,7 @@
 //dp[i] 表示有i个数有限制的方案数 无限制的数始终是n个
 //考虑第i个有限制的数的放法，要么放到之前的某个有限制的位置，这个就是错排
 //要么放到无限制的位置上去，一共有n种放法
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -27,6 +28,34 @@ int DerangementsDiv2::count(int n, int m) {
     }
     return dp[m];
 }
+/*
+ //容斥:枚举几个恰好在自己位置
+int DerangementsDiv2::count(int n, int m) {
+    vector <int> fac(n + m + 1);
+    fac[0] = 1;
+    for (int i = 1; i <= n + m; i++) {
+        fac[i] = 1LL *  fac[i - 1] * i % md;
+    }
+    vector <vector <int> > bino (m + 1, vector <int> (m + 1, 0));
+    bino[0][0] = 1;
+    for (int i = 1; i <= m; i++) {
+        bino[i][0] = bino[i][i] = 1;
+        for (int j = 1; j < i; j++) {
+            bino[i][j] = (bino[i - 1][j] + bino[i - 1][j - 1]) % md;
+        }
+    }
+    int ret = 0;
+    for (int i = 0; i <= m; i++) {
+        int tmp = 1LL * bino[m][i] * fac[(n + m - i)] % md;
+        if (i & 1) {
+            ret = ret - tmp;
+        } else {
+            ret = ret + tmp;
+        }
+        ret = (ret % md + md) % md;
+    }
+    return ret;
+}*/
 
 // BEGIN CUT HERE
 namespace moj_harness {
