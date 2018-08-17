@@ -3,7 +3,7 @@ using namespace std;
 
 int x;
 
-//形式参数 
+//形式参数
 void add(int a, int b) {
     a = 10;
     b = 20;

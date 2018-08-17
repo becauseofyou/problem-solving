@@ -4,7 +4,7 @@ using namespace std;
 struct interval {
     int l, r;
 
-    //成员函数 
+    //成员函数
     void input() {
         scanf("%d%d", &l, &r);
     }
