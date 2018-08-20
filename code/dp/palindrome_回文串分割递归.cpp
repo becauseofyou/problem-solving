@@ -14,9 +14,9 @@ int f[N];
 
 int solve(int i)
 {
-    //当前要解决f[i]的问题
-    //然后我们发现j->i是一个回文串
-    //那么我们需要先解决f[j - 1]这个子问题
+    //当前要解决前i个字符的答案
+    //我们发现j->i是一个回文串
+    //那么我们需要先解决前j-1个字符的答案 
     if (i < 0) {
         return 0;
     }
@@ -38,10 +38,10 @@ int main () {
     scanf("%s", s);
     int n = strlen(s);
     memset(is, false, sizeof(is));
+    memset(f, -1, sizeof(f));
     for (int i = 0; i < n; i++) {
         for (int j = 0;i-j>=0 && i+j<n; j++) {
             if (s[i-j] == s[i+j]) {
-              //  printf("%d %d\n", i-j, i+j);
                 is[i-j][i+j]=true;
             } else {
                 break;
@@ -57,7 +57,6 @@ int main () {
             }
         }
     }
-    memset(f, -1, sizeof(f));
     printf("%d\n", solve(n - 1));
     return 0;
 }

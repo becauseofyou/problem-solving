@@ -10,12 +10,13 @@ f[i] = 1;
 
 f[1]-> f[i]
 
+subproblem
 f[i+1] = max(f[j] + 1) //对于所有的能接上来的j 挑选一个最大的
 
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j < i; j++) {
             if (a[j] < a[i]) {
-                f[j]+1 -> f[i]
+                checkmin(f[i], f[j] + 1);
             }
         }
     }

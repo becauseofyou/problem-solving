@@ -39,8 +39,9 @@ int solve(int i, int j) {
 }
 int main () {
     scanf("%s", s);
-    int len = strlen(s);
+    int n = strlen(s);
     memset(f, -1, sizeof(f));
-    printf("%d\n", solve(0, len - 1));
+    int ret = solve(0, n - 1);
+    printf("%d\n", ret);
     return 0;
 }
