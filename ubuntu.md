@@ -3,38 +3,55 @@
 https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
 选择自己的ubutnu版本
 >```sudo gedit /etc/apt/sources.list ```
+
 >```sudo apt-get clean```
+
 >```sudo apt-get update```
+
 >```sudo apt-get upgrade```
 
 # 修改主机名
 > ```sudo vi /etc/hosts```
+
 >```sudo vi /etc/hostname```
 >右上角->关于这台计算机->直接修改
 
 # 增加管理员权限用户
 >```sudo su```
+
 >```adduser oier```
+
 >```sudo vi /etc/sudoers ```
+
 >```sudo userdel -r lenovo  -f```
 
 # 安装vim chrome ffmpeg git
 >```sudo apt-get purge vim-common```
+
 >```sudo apt-get update```
+
 >```sudo apt-get upgrade```
+
 >```sudo apt install chromium-browser vim emacs ffmpeg git ```
 
 # 更新文件英文目录
 >```export LANG=en_US```
+
 >```xdg-user-dirs-gtk-update```
 
 # 安装monaco字体
 >```cd /usr/share/fonts/truetype/```
+
 >```sudo mkdir ttf-monaco```
+
 >```cd ttf-monaco/```
+
 >```sudo wget http://codybonney.com/files/fonts/Monaco_Linux.ttf```
+
 >```sudo mkfontdir```
+
 >```cd ..```
+
 >```fc-cache```
 
 # 放置常用软件，不容易被误删除
@@ -50,15 +67,21 @@ https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
 # sublime text
 
 >```wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -```
+
 >```sudo apt-get install apt-transport-https```
+
 >```echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list```
+
 >```sudo apt-get update```
+
 >```sudo apt-get install sublime-text```
 
 # 搜狗拼音
 >官网下载ｄｅｂ包
 >```sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb ```
+
 >```sudo apt install -f```
+
 >```sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb ```
 
 # 安装topcoder
