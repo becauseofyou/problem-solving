@@ -143,3 +143,5 @@ hi CursorLine   cterm=NONE ctermbg=238 ctermfg=none
 # 系统设置
 
 外观：开启工作区 自动隐藏侧边栏
+
+[科学上网](https://blog.csdn.net/mynameis121/article/details/70191057)
