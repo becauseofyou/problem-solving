@@ -12,18 +12,24 @@ struct Edge {
 
 vector <Edge> e[N]; // point to, important
 int cnt[N];
-int p[N];
+int p[N], owe[N];
+int ret;
 
 void dfs(int u, int f) { 
+    int important_edges_need_open = 0;
+    owe[u] = 0;
     for (auto it : e[u]) {
         if (it.to != f) {
             dfs(it.to, u);
-            cnt[u] += cnt[it.to];
-            if(it.important && !it.opened ){ // important and not open
-                cnt[u] += (cnt[it.to] % 2) == 0;
+            int need = it.important && !it.opened;
+            owe[u] ^= need;
+            important_edges_need_open += need;
+            if (it.opened && it.important) {
+                ret += owe[it.to];
             }
         }
     }
+    ret += important_edges_need_open / 2;
 }
 int main () {
     int n;
@@ -38,6 +44,6 @@ int main () {
         e[p[i]].push_back(Edge(i + 1, imp[i] == '1', start[i] == '1'));
     }
     dfs(0, -1);
-    cout << (cnt[0] + 1) / 2;
+    cout << ret << endl;
     return 0;
 }
