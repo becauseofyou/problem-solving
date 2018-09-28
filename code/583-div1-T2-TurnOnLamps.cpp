@@ -10,26 +10,34 @@ struct Edge {
     }
 };
 
-vector <Edge> e[N]; // point to, important
+vector <Edge> e[N]; 
 int cnt[N];
 int p[N], owe[N];
 int ret;
-
+//注意到重要的已经打开的边是无需再进行操作的
+//假设有两条路径经过这条边，那么这两条路径完全可以转换成不经过这条边的两条路径
+//比如下面这个例子
+//   \     /
+//     --- 
+//   /     \
 void dfs(int u, int f) { 
-    int important_edges_need_open = 0;
+    int sum = 0;
     owe[u] = 0;
     for (auto it : e[u]) {
         if (it.to != f) {
             dfs(it.to, u);
-            int need = it.important && !it.opened;
+            //重要的边需要打开 或者 下面有欠&&不重要的边
+            int need = it.important && !it.opened || owe[it.to] && !it.important; 
             owe[u] ^= need;
-            important_edges_need_open += need;
+            sum += need;
+            //已经打开的重要的边无需再操作 如果下面有欠（延伸上来） 就在此终结
             if (it.opened && it.important) {
                 ret += owe[it.to];
             }
         }
     }
-    ret += important_edges_need_open / 2;
+    //横跨u的路径数量
+    ret += sum / 2;
 }
 int main () {
     int n;
@@ -44,6 +52,7 @@ int main () {
         e[p[i]].push_back(Edge(i + 1, imp[i] == '1', start[i] == '1'));
     }
     dfs(0, -1);
+    ret += owe[0];
     cout << ret << endl;
     return 0;
 }
