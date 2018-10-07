@@ -50,6 +50,7 @@ const int MAX_NODE = 100010; // 100000个点
 const int MAX_EDGE = 200010;//100000条边，双向边开两倍空间
 int head[MAX_NODE], nxt[MAX_EDGE], pnt[MAX_EDGE], weight[MAX_EDGE];
 int E;
+//可以手动模拟加边函数来理解邻接表
 void add_edge(int a, int b, int c) {
     pnt[E] = b;
     nxt[E] = head[a];
