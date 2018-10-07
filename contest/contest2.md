@@ -1,4 +1,4 @@
-# NOIP模拟赛
+# NOIP模拟赛2
 
 [TOC]
 
@@ -160,7 +160,7 @@ $1 \le a_i,b_i,c_i \le 10000$
 
 yys: ''yyq快来看这个题是最小的最大''
 
-yyq: ''此题一定是二分无疑了'':cowboy_hat_face:
+yyq: ''此题一定是二分无疑了'':laughing:
 
 yyk: "二分能过此题我请你吃XJ食堂吧"
 
