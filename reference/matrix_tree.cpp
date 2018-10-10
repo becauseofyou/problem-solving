@@ -1,3 +1,5 @@
+#include <bits/stdc++.h>
+using namespace std;
 #define zero(x) ((x>0? x:-x)<1e-15)
 const int N = 100;
 double a[N][N];
@@ -32,6 +34,14 @@ double det(double a[][N],int n) {
     return ret;
 }
 int main() {
+    memset(a, 0, sizeof(a));
+    for (int i = 0; i < 4; i++) {
+        a[i][i] = 3;
+        for (int j = 0; j < 4; j++) if(j != i){
+            a[i][j] --;
+        }
+    }
+    cout << det(a, 3);
     /* 0 based
      * a[i][i] = degree[i];
      * if(g[i][j]) {
