@@ -69,7 +69,7 @@ void slect(int k, Node *goal) {
     splay(x, goal);
 }
 int a[N];
-void build(Node *&x, int l, int r, Node *fa) {
+void build(Node* &x, int l, int r, Node *fa) {
     if(l > r)  {
         return ;
     }
