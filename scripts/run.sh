@@ -1,23 +1,15 @@
-#!/bin/bash
-g++ my.cpp -o my
-
-file='*.in'
-i=1
-for item in $file
-do
-    filename=${item%.*}
-    echo -e "\033[33m running on test $i... \033[0m"
-    /usr/bin/time -f %U ./my < $item > my$i.ans 2>tmp
-    tm=`cat tmp`
-    rm tmp
-    if diff my$i.ans $filename.out; then
-        echo -e -n "\033[33m Example $i... \033[0m"
-        echo -e "\033[32m PASSED   Time: $tm s\033[0m"
-        rm my$i.ans
+g++-6 gen.cpp -o gen
+g++-6 std.cpp -o std
+g++-6 brute.cpp -o brute
+while true; do
+    ./gen > data.in
+    ./std < data.in > std.out
+    ./brute <data.in > brute.out
+    if diff std.out brute.out; then
+        echo AC
     else
-        echo -e -n "\033[33m Example $i... \033[0m"
-        echo -e "\033[31m FAILED\033[0m"
+        echo WA
+        cat std.out brute.out
+        exit 0
     fi
-    i=$(($i+1))
-    echo -e
 done
