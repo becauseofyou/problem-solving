@@ -4,7 +4,7 @@ INPUT_NAME=input
 OUTPUT_NAME=output
 MY_NAME=my_output
 
-if ! g++-6 -g  -Wall std.cpp; then
+if ! g++-6 -g  -Wall B.cpp -std=c++11; then
     exit
 fi
 
@@ -24,19 +24,19 @@ do
         cat $INPUT_NAME$test_case
     else
         if diff --brief $MY_NAME$test_case $OUTPUT_NAME$test_case; then
-            echo [1m[32mSample test \#$test_case: Accepted[0m 
+            echo [33m[34mSample test \#$test_case: Accepted[0m 
         else
             echo [1m[31mSample test \#$test_case: Wrong Answer[0m 
-            echo ========================================
-            echo Sample Input \#$test_case
-            cat $INPUT_NAME$test_case
-            echo ========================================
-            echo Sample Output \#$test_case
-            cat $OUTPUT_NAME$test_case
-            echo ========================================
-            echo My Output \#$test_case
-            cat $MY_NAME$test_case
-            echo ========================================
         fi
+        echo ========================================
+        echo Sample Input \#$test_case
+        cat $INPUT_NAME$test_case
+        echo ========================================
+        echo Sample Output \#$test_case
+        cat $OUTPUT_NAME$test_case
+        echo ========================================
+        echo My Output \#$test_case
+        cat $MY_NAME$test_case
+        echo ========================================
     fi
 done
