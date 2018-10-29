@@ -6,6 +6,7 @@ using namespace std;
 #define pii pair<int,int>
 #define X first
 #define Y second
+#define debug(x) for(auto it:x)cerr<<it<<" ";cerr<<endl;
 
 template <typename T> void checkmin(T &a, T b) { if (a > b) { a = b; } }
 template <typename T> void checkmax(T &a, T b) { if (a < b) { a = b; } }
