@@ -4,8 +4,8 @@ using namespace std;
 #define all(x) x.begin(),x.end()
 #define pb push_back
 #define pii pair<int,int>
-#define X first
-#define Y second
+#define fi first
+#define se second
 
 template <typename T> void checkmin(T &a, T b) { if (a > b) { a = b; } }
 template <typename T> void checkmax(T &a, T b) { if (a < b) { a = b; } }
