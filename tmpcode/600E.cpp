@@ -6,9 +6,11 @@ const int N = 100010;
 vector <int> e[N];
 int col[N];
 int sz[N];
-int sum;
 int mx;
+int cnt[N];
 bool vis[N];
+long long sum;
+long long ans[N];
 
 void dfs(int u, int f) {
     sz[u] = 1;
@@ -20,17 +22,30 @@ void dfs(int u, int f) {
         }
         dfs(v, u);
         sz[u] += sz[v];
-        if (idx == -1 || sz[v] > sz[edge[u][idx]]) {
+        if (idx == -1 || sz[v] > sz[e[u][idx]]) {
             idx = i;
         }
     }
     if (~idx) {
-        swap(edge[u][0], edge[u][idx]);
+        swap(e[u][0], e[u][idx]);
     }
 }
 
 
 void insert(int u, int f, int v) {
+    cnt[col[u]] += v;
+    if (cnt[col[u]] > mx) {
+        mx = cnt[col[u]];
+        sum = col[u];
+    } else if (cnt[col[u]] == mx){
+        sum += col[u];
+    }
+    
+    for (auto it : e[u]) {
+        if (it != f && !vis[it]) {
+            insert(it, u, v);
+        }
+    }
 }
 
 void solve(int u, int f, bool big) {
@@ -41,15 +56,15 @@ void solve(int u, int f, bool big) {
         }
         solve(v, u, false);
     }
-    if (e[u].first() != f) {
-        solve(e[u].first(), u, true);
-        vis[e[u].first()] = true;
+    if (*e[u].begin() != f) {
+        solve(*e[u].begin(), u, true);
+        vis[*e[u].begin()] = true;
     }
 
-    insert(u, f, 1); // add the light sons
+    insert(u, f, 1); // add u's light sons
     ans[u] = sum;
-    if (e[u].first() != -1) {
-        vis[e[u].first()] = false;
+    if (*e[u].begin() != -1) {
+        vis[*e[u].begin()] = false;
     }
     if(false == big) {
         insert(u, f, -1);
@@ -63,6 +78,7 @@ int main (){
     for (int i = 0; i < n; i++) {
         scanf("%d", &col[i]);
     }
+    int x, y;
     for (int i = 1; i < n; i++) {
         scanf("%d%d", &x, &y);
         x--; y--;
@@ -70,6 +86,9 @@ int main (){
         e[y].push_back(x);
     }
     dfs(0, -1);
-    solve(0, -1);
+    solve(0, -1, false);
+    for (int i = 0; i < n; i++) {
+        printf("%lld ", ans[i]);
+    }
     return 0;
 }
