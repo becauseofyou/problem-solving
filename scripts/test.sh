@@ -3,9 +3,9 @@
 INPUT_NAME=input
 OUTPUT_NAME=output
 MY_NAME=my_output
-cppfile=B.cpp
+cppfile=noname.cpp
 
-if ! g++ -g  -Wall $cppfile -std=c++11; then
+if ! g++ -g  -Wall $1 -std=c++11; then
     exit
 fi
 
@@ -25,7 +25,6 @@ do
         echo ========================================
         echo Sample Input \#$test_case
         cat $INPUT_NAME$test_case
-        all
     else
         if diff --brief $MY_NAME$test_case $OUTPUT_NAME$test_case; then
             echo -e "\033[42;30mSample test #$test_case: Passed \033[0m"
