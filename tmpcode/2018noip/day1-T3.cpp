@@ -7,19 +7,28 @@ vector <pair<int, int> > e[N];
 int n, m;
 int w[N];
 int total;
+int pnt[N << 1], nxt[N << 1], we[N << 1], head[N], E;
+
+void add(int a, int b, int c) {
+    pnt[E] = b;
+    we[E] = c;
+    nxt[E] = head[a];
+    head[a] = E++;
+}
 
 void dfs(int u, int f, int x) {
     if (total >= m) {
         return ;
     }
     multiset <int> st;
-    for (auto it : e[u]) {
-        if (it.first != f) {
-            dfs(it.first, u, x);
+    for (int i = head[u]; i != -1; i = nxt[i]) {
+        int v = pnt[i];
+        if (v != f) {
+            dfs(v, u, x);
             if (total >= m) {
                 return ;
             }
-            int value = w[it.first] + it.second;
+            int value = w[v] + we[i];
             if (value >= x) {
                 total++;
             } else {
@@ -58,15 +67,19 @@ bool judge (int x) {
 }
 
 int main () {
+    E = 0;
+    memset(head, -1, sizeof(head));
     scanf("%d%d", &n, &m);
     int a, b, c;
+    int sum = 0;
     for (int i = 1; i < n; i++) {
         scanf("%d%d%d", &a, &b, &c);
+        sum += c;
         a--; b--;
-        e[a].push_back(make_pair(b, c));
-        e[b].push_back(make_pair(a, c));
+        add(a, b, c);
+        add(b, a, c);
     }
-    int l = 1, r = 500000000, best = -1;
+    int l = 1, r = sum, best = -1;
     while (l <= r) {
         int mid = (l + r) >> 1;
         if (judge (mid)) {

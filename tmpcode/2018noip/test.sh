@@ -26,7 +26,7 @@ do
         echo Sample Input \#$test_case
         cat $INPUT_NAME$test_case
     else
-        if diff --brief $MY_NAME$test_case $OUTPUT_NAME$test_case; then
+        if diff -b -B $MY_NAME$test_case $OUTPUT_NAME$test_case; then
             echo -e "\033[42;30mSample test #$test_case: Passed \033[0m"
 			passed=$(($passed+1))
         else
