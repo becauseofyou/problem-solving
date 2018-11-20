@@ -16,6 +16,7 @@ set autochdir
 nmap <tab> :bn <enter>
 map<f4> :!gnome-terminal -x bash -c "g++ -std=c++11 % -Wall; read" <enter> <cr> 
 map<f5> :!gnome-terminal -x bash -c "./test.sh %; read" <enter> <cr>
+map<f6> :!gnome-terminal -x bash -c "./a.out ; read" <enter> <cr>
 colorscheme default 
 set cursorline
 hi CursorLine   cterm=NONE ctermbg=238 ctermfg=none
