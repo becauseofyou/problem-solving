@@ -5,7 +5,7 @@ OUTPUT_NAME=output
 MY_NAME=my_output
 cppfile=noname.cpp
 
-if ! g++ -g  -Wall $1 -std=c++11; then
+if ! g++ -g  -Wall $1 -std=c++11 -O2; then
     exit
 fi
 
