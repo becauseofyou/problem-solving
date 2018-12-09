@@ -30,23 +30,23 @@ do
             echo -e "\033[42;30mSample test #$test_case: Passed \033[0m"
 			passed=$(($passed+1))
         else
-            echo -e "\033[41;30mSample test #$test_case: 你红了 \033[0m"
+            echo -e "\033[41;30mSample test #$test_case: failed \033[0m"
+            echo ========================================
+            echo Sample Input \#$test_case
+            cat $INPUT_NAME$test_case
+            echo ========================================
+            echo Sample Output \#$test_case
+            cat $OUTPUT_NAME$test_case
+            echo ========================================
+            echo My Output \#$test_case
+            cat $MY_NAME$test_case
+            echo ========================================
+            echo -e
         fi
-        echo ========================================
-        echo Sample Input \#$test_case
-        cat $INPUT_NAME$test_case
-        echo ========================================
-        echo Sample Output \#$test_case
-        cat $OUTPUT_NAME$test_case
-        echo ========================================
-        echo My Output \#$test_case
-        cat $MY_NAME$test_case
-        echo ========================================
-        echo -e
     fi
 done
 if (($all == $passed)); then
-	echo -e "\033[42;30m Successfully Passed All the $all tests \033[0m"
+    echo -e "\033[42;30m Successfully Passed All the $all tests \033[0m"
 else
-	echo -e  "\033[43;34m 一共有$all组数据，你通过了$passed组，红了$(($all-$passed))组 \033[0m" 
+    echo -e  "\033[43;34m $all cases，passed $passed，failed $(($all-$passed)) \033[0m" 
 fi
