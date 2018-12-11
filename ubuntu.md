@@ -4,6 +4,7 @@ https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/
 选择自己的ubutnu版本
 >```sudo gedit /etc/apt/sources.list ```
 
+test
 >```sudo apt-get clean```
 
 >```sudo apt-get update```
